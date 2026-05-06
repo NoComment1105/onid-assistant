@@ -8,4 +8,4 @@ pluginManagement {
 	}
 }
 
-rootProject.name = "onidassistant"
+rootProject.name = "onid-assistant"

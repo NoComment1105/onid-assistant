@@ -8,7 +8,6 @@ plugins {
 
     alias(libs.plugins.kotlin)
 	alias(libs.plugins.kotlinx.serialization)
-    alias(libs.plugins.shadow)
     alias(libs.plugins.detekt)
     alias(libs.plugins.git.hooks)
 	alias(libs.plugins.kord.extensions.plugin)
@@ -21,12 +20,7 @@ val className = "io.github.nocomment1105.onidassistant.OnidAssistantKt"
 val javaVersion = 21
 
 repositories {
-    mavenCentral()
-
-	maven {
-		name = "Kord Snapshots"
-		url = uri("https://repo.kord.dev/snapshots")
-	}
+	mavenCentral()
 
 	maven {
 		name = "Kord Extensions (Releases)"
@@ -38,15 +32,15 @@ repositories {
 		url = uri("https://snapshots-repo.kordex.dev")
 	}
 
-    maven {
-        name = "Sonatype Snapshots (Legacy)"
-        url = uri("https://oss.sonatype.org/content/repositories/snapshots")
-    }
+	maven {
+		name = "Kord Snapshots"
+		url = uri("https://repo.kordex.dev/snapshots")
+	}
 
-    maven {
-        name = "Sonatype Snapshots"
-        url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-    }
+	maven {
+		name = "Kord Mirror"
+		url = uri("https://mirror-repo.kordex.dev")
+	}
 }
 
 dependencies {
@@ -59,22 +53,33 @@ dependencies {
     implementation(libs.kotlin.stdlib)
 
     // Logging Deps
-	implementation(libs.groovy)
-	implementation(libs.jansi)
 	implementation(libs.logback)
-	implementation(libs.logback.groovy)
 	implementation(libs.logging)
 
 	// Database
-	implementation(libs.kmongo)
+	implementation(libs.mongodb)
+	implementation(libs.mongodb.driverkx)
+	implementation(libs.bsonkx)
 
 	implementation(libs.ktor.auth)
+}
+
+distributions {
+	main {
+		distributionBaseName = project.name
+
+		contents {
+			from("LICENSE")
+			exclude("README.md")
+		}
+	}
 }
 
 kordEx {
 	addDependencies = false
 	addRepositories = false
 	kordExVersion = libs.versions.kord.extensions
+	ignoreIncompatibleKotlinVersion = true
 
 	bot {
 		dataCollection(DataCollection.None)

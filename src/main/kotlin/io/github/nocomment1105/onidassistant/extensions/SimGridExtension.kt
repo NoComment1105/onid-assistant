@@ -22,9 +22,10 @@ import io.github.nocomment1105.onidassistant.api.SimGrid
 import io.github.nocomment1105.onidassistant.utils.GUILD_ID
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.toList
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.milliseconds
 
 class SimGridExtension : Extension() {
 	override val name: String = "simgrid-commands"
@@ -233,7 +234,7 @@ class SimGridExtension : Extension() {
 				}
 			}
 			// Just to try and avoid pounding rate limits
-			delay(250)
+			delay(250.milliseconds)
 		}
 	}
 
