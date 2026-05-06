@@ -14,7 +14,7 @@ plugins {
 }
 
 group = "io.github.nocomment1105.onidassistant"
-version = "0.2.1"
+version = "0.3.0"
 
 val className = "io.github.nocomment1105.onidassistant.OnidAssistantKt"
 val javaVersion = 21
